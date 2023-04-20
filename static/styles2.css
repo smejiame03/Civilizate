@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;700&display=swap');
+
+body{
+    font-family: 'Josefin Sans', sans-serif;
+    background-color: #f7e0f26c;
+    opacity: 1;
+    background-image:  radial-gradient(#1940ac 1px, transparent 1px), radial-gradient(#1940ac 1px, #f7e0f2 1px);
+    background-size: 40px 40px;
+    background-position: 0 0,20px 20px;
+}
+
+.hero{
+    height: 100vh;
+    background-image: linear-gradient(to top, hsla(177, 66%, 79%, 0.5) 0%, hsla(342, 95%, 92%, 0.5) 100%), url(../static/images/Logo.jpeg);
+    background-repeat: repeat;
+    background-attachment:fixed;
+    background-position: 50%;
+    background-size:contain;
+}
+
+.footer{
+    position: relative;
+    --padding-container: 250px 0 50px;
+}
+
+.footer::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    background: #68E1FD;
+    top: 0;
+    left: 0;
+    z-index:-1;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+.footer__consolidado{
+    display: grid;
+    place-items: center;
+    margin-bottom: 30px;
+}
+
+.footer__texts{
+    text-align: center;
+    justify-self: center;
+    padding: 20px;
+    font-weight: 300;
+}
+
+.footer__copy{
+    margin: 20px 0;
+    font-weight: 300;
+}
+
+.hero_container .hero_texts{
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.hero_copy{
+    text-align: center;
+    background: rgba(0,0,0,.7);
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #1940ac;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 2px;
+    font-size: 14px;
+    color:#FFF;
+}
+
+.hero_title{
+    font-size: 4rem;
+    color:#1940ac;
+    text-align: center;
+    padding: 14px 0;
+}
+
+.hero_texts{
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.paragra{
+    color:#68E1FD;
+}
+
+.hero_container{
+    display: grid;
+    height: 100%;
+    place-items: center;
+    gap: 20px;
+    margin: auto;
+}
+
+.btn_submit{
+    text-align: center;
+    background: rgba(0,0,0,.7);
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #1940ac;
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 2px;
+    font-size: 14px;
+    color:#FFF;
+    padding: 15px 0;
+    cursor: pointer;
+}
+
+.btn_submit:hover{
+    opacity: 0.5;
+    color:gray;
+}

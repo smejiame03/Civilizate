@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta Ingeniería Civil</title>
+    <link rel="shortcut icon" href="../static/images/icono.png" type="image/x-icon">
+    <link rel="stylesheet" href="../static/normalize.css">
+    <link rel="stylesheet" href="../static/styles.css">
+    <script src="../static/query/general.js"></script>
+    <script src="https://maps.google.com/maps/api/js?sensor=false"></script>
+</head>
+<body>
+    <header class="hero">
+        <div class="hero__container container">
+            <div class="hero__texts">
+                <h1 class="hero__title">Bienvenido a la encuesta</h1>
+                <p class="hero__copy">Análisis y diagnóstico del grado de vulnerabilidad de su vivienda</p>
+            </div>
+        </div>
+    </header>
+    <main class="main">
+        <form name="formulario" action="../DB/db.php" method="post">  
+        <section class="Info_encuestado container">
+            <div class="encuestado__container">
+                <h2 class="form_title">Información del encuestado</h2>
+                <!--Primer Nombre-->
+                <label for="PrimerNombre" class="form_label">Primer Nombre:</label>
+                <input type="text" name="PrimerNombre" required="required" class="form_input" placeholder="Escriba su primer nombre" minlength="3"><br>
+                <!--Segundo Nombre-->
+                <label for="SegundoNombre" class="form_label">Segundo Nombre:</label>
+                <input type="text" name="SegundoNombre" required="required" class="form_input" placeholder="Escriba su segundo nombre" minlength="3"><br>
+                <!--Primer Apellido-->
+                <label for="PrimerApellido" class="form_label">Primer Apellido:</label>
+                <input type="text" name="PrimerApellido" required="required" class="form_input" placeholder="Escriba su primer apellido" minlength="3"><br>
+                <!--Segundo Apellido-->
+                <label for="SegundoApellido" class="form_label">Segundo Apellido:</label>
+                <input type="text" name="SegundoApellido" required="required" class="form_input" placeholder="Escriba su segundo apellido" minlength="3"><br>
+                <!--Celular-->
+                <label for="Celular" class="form_label">Celular:</label>
+                <input type="number" name="Celular" required="required" class="form_input" placeholder="Escriba su número de celular" minlength="10"><br>
+                <!--Correo Electronico-->
+                <label for="Correo" class="form_label">Correo Electrónico:</label>
+                <input type="email" name="Correo" class="form_input" required="required" placeholder="Escriba su correo electrónico" minlength="12"><br>
+                <!--Cedula-->
+                <label for="Cedula" class="form_label">Cédula:</label>
+                <input type="number" name="Cedula" class="form_input" required="required" placeholder="Escriba su número de cédula" minlength="7"><br>
+                <!--Direccion-->
+                <label for="Direccion" class="form_label">Dirección:</label>
+                <input type="text" name="Direccion" class="form_input" required="required" placeholder="Escriba su dirección de residencia" minlength="12"><br>
+                <!--Edificacion-->
+                <label for="NomUnidad" class="form_label">Nombre de la unidad o edificación (opcional):</label>
+                <input type="text" name="NomUnidad" class="form_input" placeholder="Escriba el nombre de su unidad o edificación"><br>
+                <!--Departamento-->
+                <label for="Departamento" class="form_label">Departamento:</label>
+                <input type="text" name="Departamento" class="form_input" required="required" placeholder="Escriba su departamento" minlength="5"><br>
+                <!--Municipio-->
+                <label for="Municipio" class="form_label">Municipio:</label>
+                <input type="text" name="Municipio" class="form_input" required="required" placeholder="Escriba su municipio" minlength="4"><br>
+                <!--Barrio-->
+                <label for="Barrio" class="form_label">Barrio:</label>
+                <input type="text" name="Barrio" required="required" class="form_input" placeholder="Escriba su barrio" minlength="4"><br>
+                <!--Mapa-->
+                <button type="button" class="btn_map" onclick="showPosition()"> Permitir la ubicación de dispositivo</button><br><br>
+                <div id="embedMap" class="map">
+                    <!--Google map will be embedded here-->
+                </div>
+                <!--Tratamiento-->
+                <br><label class="form_label">Autorizo el tratamiento de mis datos personales: Si <input class= "form_check" type="radio" name="Autorizacion" id="AutorizaciónOn" onclick="validarAutorizacionSi(this)"> 
+                    No <input clas="form_check" type="radio" name="Autorizacion" id="AutorizaciónOff" onclick="validarAutorizacionNo(this)"><br></label>
+                <br><a href="FrmExterior.html"><input type="submit" class="btn_submit" value="Continuar" id="BotonNext"></a>
+            </div>
+        </section>
+        </form>
+    </main>
+    <footer class="footer">
+        <div class="footer__container container">
+            <div class="footer__consolidado">
+                <div class="footer__texts">
+                    <br><br><br><br><p class="footer__copy">Encuesta realizada por estudiantes de Ingeniería Civil</p><br>
+                    <p>Universidad Católica Luis Amigó, sede Medellín<br>Tv. 51a ##67B 90, Medellín, Antioquia</p><br>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

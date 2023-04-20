@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interior de la vivienda</title>
+    <link rel="shortcut icon" href="../static/images/icono.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600|Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <link rel="stylesheet" href="../static/normalize.css">
+    <link rel="stylesheet" href="../static/styles1.css">
+    <script src="../static/query/scriptsInterior.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body> 
+    <main class="main">
+        <form name="FormularioInterior" action="../DB/db_Interior.php" method="post">
+            <div class="contenedor">
+                <section class="Info_encuestado container">
+                    <div class="encuestado_container">
+                        <h2 class="form_title">Al interior de la vivienda</h2>
+                        <p class="text_title">Las siguientes preguntas se deberán realizar en el interior de la vivienda
+                            para poder observar las características de las preguntas</p><br>
+                        <!--8-->
+                        <label class="form_label">Altura entre pisos</label>
+                        <select name="alturapisos" id="alturapisos" onchange="VerificarPisos()" required>
+                            <option value="#">Seleccione una opción</option>
+                            <option value="2 Metros">2 Metros</option>
+                            <option value="2.1 a 2.5 Metros">2.1 a 2.5 Metros</option>
+                            <option value="2.6 a 3 Metros">2.6 a 3 Metros</option>
+                            <option value="3.1 metros o mayores">3.1 metros o mayores</option>
+                        </select>
+                        <label id="mjaltura" class="form_label"></label>
+                        <!--9.1-->
+                        <br><label class="form_label">Material de construcción:</label>
+                        <br><input type="radio" name="materialconstruccion[]" value="Mamposteria" onchange="Material1(this)"><label class="form_label">
+                            <abbr title="Construccion compuesta por ladrillos u otros materiales">Mamposteria</abbr></label>
+                        <button type="button" id="btn-abrir-popup2" class="btn-abrir-popup"style="vertical-align: auto;;" onclick="abrir2()">Imagen guía</button>
+                        <div class="overlay" id="overlay2">
+                            <div class="popup" id="popup2">
+                                <a href="#" id="btn-cerrar-popup2" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                                <img src="../static/images/Mamposteria(15).png" width="100%" height="100%">
+                            </div>
+                        </div>
+                        <script src="../static/query/popup.js"></script>
+                        <br><input type="radio" name="materialconstruccion[]" value="Concreto reforzado" onchange="Material2(this)"><label class="form_label">
+                            <abbr title="Construccion compuesta por concreto y acero"> Concreto reforzado</abbr></label>
+                        <br><input type="radio" name="materialconstruccion[]" value="Prefabricado" onchange="Material3(this)"><label class="form_label"><abbr title="Construccion por secciones o modulos que fueron diseñadas con antelacion por fuera de la Construccion">
+                                Prefabricado</abbr></label>
+                        <button type="button" id="btn-abrir-popup1" class="btn-abrir-popup" onclick="abrir1()">Imagen guía</button>
+                        <div class="overlay" id="overlay1">
+                            <div class="popup" id="popup1">
+                                <a href="#" id="btn-cerrar-popup1" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                                <img src="../static/images/Prefabricado(12).jpg" width="100%" height="100%">
+                            </div>
+                        </div>
+                        <script src="../static/query/popup.js"></script>
+                        <br><input type="radio" name="materialconstruccion[]" value="Acero" onchange="Material4(this)"><label class="form_label"> Acero</label>
+                        <br><input type="radio" name="materialconstruccion[]" value="Madera" onchange="Material5(this)"><label class="form_label"> Madera</label>
+                        <br><input type="radio" name="materialconstruccion[]" value="Adobe" onchange="Material6(this)"><label class="form_label"> Adobe</label>
+                        <br><input type="radio" name="materialconstruccion[]" value="Tapia" onchange="Material7(this)"><label class="form_label"> Tapia</label>
+                        <button type="button" id="btn-abrir-popup3" class="btn-abrir-popup" style="vertical-align: auto;;" onclick="abrir3()">Imagen guía</button>
+                        <div class="overlay" id="overlay3">
+                            <div class="popup" id="popup3">
+                                <a href="#" id="btn-cerrar-popup3" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                                <img src="../static/images/Tapia(16).jpg" width="100%" height="100%">
+                            </div>
+                        </div>
+                        <script src="../static/query/popup.js"></script>
+                        <br><input type="radio" name="materialconstruccion[]" value="Guadua" onchange="Material8(this)"><label class="form_label"> Guadua</label>
+                        <br><input type="radio" name="materialconstruccion[]" value="Otro" onchange="Material9(this)"><label class="form_label"> Otro</label>
+                        <br><label id="mensaje" class="form_label"></label>
+                        <div id="aparece" style="display:none"><label class="form_label">Cual? </label>
+                            <input type="text" name="materialconstruccion[]" id="textother" class="form_input" placeholder="Especifique otros"/></div>
+                        <!--9.2.1-->
+                        <div id="listaA" style="display:none">
+                            <label class="form_label">Tipo de Mamposteria: </label>
+                            <br><input type="radio" name="TipoMamposteria" value="Reforzada" onchange="listaA1(this)"><label
+                                class="form_label"><abbr title="contiene acero al interior de la estructura">Reforzada</abbr></label>
+                            <button type="button" id="btn-abrir-popup4" class="btn-abrir-popup" style="vertical-align: auto;;" onclick="abrir4()">Imagen guía</button>
+                            <div class="overlay" id="overlay4">
+                                <div class="popup" id="popup4">
+                                    <a href="#" id="btn-cerrar-popup4" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                                    <img src="../static/images/Mamposteria(3).gif" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <script src="../static/query/popup.js"></script>
+                            <br><input type="radio" name="TipoMamposteria" value="No reforzada" onchange="listaA1(this)"><label class="form_label"><abbr
+                                    title="No contiene hierro al interior de la estructura, solo sería el adobe"> No reforzada</abbr></label>
+                            <br><input type="radio" name="TipoMamposteria" value="Confinada" onchange="listaA1(this)"><label class="form_label"><abbr
+                                    title="Muro el cual está encerrado alrededor por vigas y columnas">Confinada</abbr></label>
+                            <button type="button" id="btn-abrir-popup5" class="btn-abrir-popup" style="vertical-align: auto;;" onclick="abrir5()">Imagen guía</button>
+                            <div class="overlay" id="overlay5">
+                                <div class="popup" id="popup5">
+                                    <a href="#" id="btn-cerrar-popup5" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                                    <img src="../static/images/Mamposteria(2).png" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <script src="../static/query/popup.js"></script>
+                        </div>
+                        <!--9.2.2-->
+                        <div id="listaB" style="display:none;">
+                            <label class="form_label">Concreto Reforzado: </label>
+                            <br><input type="radio" name="ConcretoReforzado" value="Muro estructural" onchange="listaB1(this)"><label
+                                class="form_label"><abbr title="Muro el cual no se puede quitar ni modificar, ya que son muros que soportan la carga de la vivienda">
+                                    Muro estructural</abbr></label>
+                            <br><input type="radio" name="ConcretoReforzado" value="Pórtico" onchange="listaB1(this)"><label class="form_label"> Pórtico</label>
+                            <button type="button" id="btn-abrir-popup6" class="btn-abrir-popup" style="vertical-align: auto;;" onclick="abrir6()">Imagen guía</button>
+                            <div class="overlay" id="overlay6">
+                                <div class="popup" id="popup6">
+                                    <a href="#" id="btn-cerrar-popup6" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                                    <img src="../static/images/SistemaPortico(7).jpg" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <script src="../static/query/popup.js"></script>
+                            <br><input type="radio" name="ConcretoReforzado" value="Sistema dual o combinado" onchange="listaB1(this)"><label
+                                class="form_label"><abbr title="Muros estructurales y pórticos (compuestos por vigas y columnas)"> Sistema
+                                    dual o combinado</abbr></label>
+                            <br><input type="radio" name="ConcretoReforzado" value="Prefabricado" onchange="listaB2(this)"><label
+                                class="form_label"><abbr title="Construcción por secciones o módulos que fueron diseñadas con antelación por fuera de la construcción">
+                                    Prefabricado</abbr></label>
+                            <button type="button" id="btn-abrir-popup7" class="btn-abrir-popup" style="vertical-align: auto;;" onclick="abrir7()">Imagen guía</button>
+                            <div class="overlay" id="overlay7">
+                                <div class="popup" id="popup7">
+                                    <a href="#" id="btn-cerrar-popup7" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                                    <img src="../static/images/Prefabricado(12).jpg" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <script src="../static/query/popup.js"></script>
+                        </div>
+                        <!--9.2.3-->
+                        <div id="listaC" style="display:none;">
+                            <label class="form_label"> Prefabricado: </label>
+                            <br><input type="radio" name="Prefabricado" value="Yeso" onchange="listaC1(this)"><label class="form_label"> Yeso</label>
+                            <button type="button" id="btn-abrir-popup8" class="btn-abrir-popup" style="vertical-align: auto;;" onclick="abrir8()">Imagen guía</button>
+                            <div class="overlay" id="overlay8">
+                                <div class="popup" id="popup8">
+                                    <a href="#" id="btn-cerrar-popup8" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                                    <img src="../static/images/Yeso(20).png" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <script src="../static/query/popup.js"></script>
+                            <br><input type="radio" name="Prefabricado" value="Madera" onchange="listaC1(this)"><label class="form_label"> Madera</label>
+                            <button type="button" id="btn-abrir-popup9" class="btn-abrir-popup" style="vertical-align: auto;;" onclick="abrir9()">Imagen guía</button>
+                            <div class="overlay" id="overlay9">
+                                <div class="popup" id="popup9">
+                                    <a href="#" id="btn-cerrar-popup9" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                                    <img src="../static/images/Madera(18).png" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <script src="../static/query/popup.js"></script>
+                            <br><input type="radio" name="Prefabricado" value="PVC" onchange="listaC1(this)"><label class="form_label"> PVC</label>
+                            <button type="button" id="btn-abrir-popup10" class="btn-abrir-popup" style="vertical-align: auto;;" onclick="abrir10()">Imagen guía</button>
+                            <div class="overlay" id="overlay10">
+                                <div class="popup" id="popup10">
+                                    <a href="#" id="btn-cerrar-popup10" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                                    <img src="../static/images/Pvc(19).png" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <script src="../static/query/popup.js"></script>
+                            <br><input type="radio" name="Prefabricado" value="Drywall" onchange="listaC2(this)"><label class="form_label"> Drywall</label>
+                            <button type="button" id="btn-abrir-popup11" class="btn-abrir-popup" style="vertical-align: auto;;" onclick="abrir11()">Imagen guía</button>
+                            <div class="overlay" id="overlay11">
+                                <div class="popup" id="popup11">
+                                    <a href="#" id="btn-cerrar-popup11" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                                    <img src="../static/images/Drywall(17).jpg" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <script src="../static/query/popup.js"></script>
+                            <br><input type="radio" name="Prefabricado" value="Fibrocemento" onchange="listaC3(this)"><label class="form_label"> Fibrocemento</label>
+                            <button type="button" id="btn-abrir-popup12" class="btn-abrir-popup" style="vertical-align: auto;;" onclick="abrir12()">Imagen guía</button>
+                            <div class="overlay" id="overlay12">
+                                <div class="popup" id="popup12">
+                                    <a href="#" id="btn-cerrar-popup12" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                                    <img src="../static/images/Fibrocemento(21).png" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <script src="../static/query/popup.js"></script>
+                            <br><input type="radio" name="Prefabricado" value="Otro" onchange="listaC4(this)"><label class="form_label"> Otro</label>
+                        </div>
+                        <div id="txtselectC" style="display:none"><label class="form_label">Cual? </label><input type="text" name="Prefabricado" id="textother" class="form_input" placeholder="Por favor especificar" />
+                        </div>
+                        <!--10.1-->
+                        <div id="viviendapiso">
+                            <label class="form_label">¿Cómo se encuentra construido el piso de la vivienda? </label>
+                            <br><input type="radio" name="pisovivienda" id="pisovivienda" value="Losa de concreto aligerada" onchange="piso1(this)"><label class="form_label"><abbr
+                                    title="conformada por concreto armado, estas se evidencian ya que forman una especie de cajón en el techo">
+                                    Losa de concreto aligerada</abbr></label>
+                            <button type="button" id="btn-abrir-popup13" class="btn-abrir-popup" style="vertical-align: auto;;" onclick="abrir13()">Imagen guía</button>
+                            <div class="overlay" id="overlay13">
+                                <div class="popup" id="popup13">
+                                    <a href="#" id="btn-cerrar-popup13" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                                    <img src="../static/images/Losa(1).png" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <script src="../static/query/popup.js"></script>
+                            <br><input type="radio" name="pisovivienda" id="pisovivienda" value="Losa de concreto macisa" onchange="piso1(this)"><label class="form_label"><abbr
+                                    title="conformada por concreto y acero"> Losa de concreto macisa</abbr></label>
+                            <button type="button" id="btn-abrir-popup14" class="btn-abrir-popup" style="vertical-align: auto;;" onclick="abrir14()">Imagen guía</button>
+                            <div class="overlay" id="overlay14">
+                                <div class="popup" id="popup14">
+                                    <a href="#" id="btn-cerrar-popup14" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                                    <img src="../static/images/LosaConcretoM(6).jpg" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <script src="../static/query/popup.js"></script>
+                            <br><input type="radio" name="pisovivienda" id="pisovivienda" value="Vigas de madera" onchange="piso2(this)"><label class="form_label"><abbr
+                                    title="conformada por concreto y acero"> Vigas de madera</abbr></label>
+                            <button type="button" id="btn-abrir-popup15" class="btn-abrir-popup" style="vertical-align: auto;;" onclick="abrir15()">Imagen guía</button>
+                            <div class="overlay" id="overlay15">
+                                <div class="popup" id="popup15">
+                                    <a href="#" id="btn-cerrar-popup15" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                                    <img src="../static/images/VigaM(4).png" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <script src="../static/query/popup.js"></script>
+                            <br><input type="radio" name="pisovivienda" id="pisovivienda" value="Vigas de acero" onchange="piso1(this)"><label class="form_label"><abbr
+                                    title="conformada por concreto y acero"> Vigas de acero</abbr></label>
+                            <button type="button" id="btn-abrir-popup16" class="btn-abrir-popup" style="vertical-align: auto;;" onclick="abrir16()">Imagen guía</button>
+                            <div class="overlay" id="overlay16">
+                                <div class="popup" id="popup16">
+                                    <a href="#" id="btn-cerrar-popup16" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                                    <img src="../static/images/VigaAcero(5).png" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <script src="../static/query/popup.js"></script>
+                        </div>
+                        <!--11-->
+                        <div id="tipotecho">
+                            <label class="form_label">Tipo de techo o cubierta: </label>
+                            <br><input type="radio" name="tipotech" id="tipotecho" value="Losa de concreto aligerada" onchange="techo1(this)"><label class="form_label"><abbr
+                                    title="conformada por concreto armado, estas se evidencian ya que forman una especie de cajón en el techo">
+                                    Losa de concreto aligerada</abbr></label>
+                            <button type="button" id="btn-abrir-popup17" class="btn-abrir-popup" style="vertical-align: auto;;" onclick="abrir17()">Imagen guía</button>
+                            <div class="overlay" id="overlay17">
+                                <div class="popup" id="popup17">
+                                    <a href="#" id="btn-cerrar-popup17" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                                    <img src="../static/images/Losa(1).png" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <script src="../static/query/popup.js"></script>
+                            <br><input type="radio" name="tipotech" id="tipotecho" value="Losa de concreto macisa" onchange="techo1(this)"><label class="form_label"><abbr title="conformada por concreto y acero">
+                                    Losa de concreto macisa</abbr></label>
+                            <button type="button" id="btn-abrir-popup18" class="btn-abrir-popup" style="vertical-align: auto;;" onclick="abrir18()">Imagen guía</button>
+                            <div class="overlay" id="overlay18">
+                                <div class="popup" id="popup18">
+                                    <a href="#" id="btn-cerrar-popup18" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                                    <img src="../static/images/LosaConcretoM(6).jpg" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <script src="../static/query/popup.js"></script>
+                            <br><input type="radio" name="tipotech" id="tipotecho" value="Zinc" onchange="techo3(this)"><label class="form_label"> Zinc</label>
+                            <button type="button" id="btn-abrir-popup19" class="btn-abrir-popup" style="vertical-align: auto;;" onclick="abrir19()">Imagen guía</button>
+                            <div class="overlay" id="overlay19">
+                                <div class="popup" id="popup19">
+                                    <a href="#" id="btn-cerrar-popup19" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                                    <img src="../static/images/Zinc(8).jpg" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <script src="../static/query/popup.js"></script>
+                            <br><input type="radio" name="tipotech" id="tipotecho" value="Termina en plancha" onchange="techo1(this)"><label class="form_label"> Termina en plancha</label>
+                            <button type="button" id="btn-abrir-popup20" class="btn-abrir-popup" style="vertical-align: auto;;" onclick="abrir20()">Imagen guía</button>
+                            <div class="overlay" id="overlay20">
+                                <div class="popup" id="popup20">
+                                    <a href="#" id="btn-cerrar-popup20" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                                    <img src="../static/images/TerminadaPlancha(14).jpg" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <script src="../static/query/popup.js"></script>
+                            <br><input type="radio" name="tipotech" id="tipotecho" value="Placa fácil" onchange="techo2(this)"><label class="form_label"> Placa fácil</label>
+                            <button type="button" id="btn-abrir-popup21" class="btn-abrir-popup" style="vertical-align: auto;;" onclick="abrir21()">Imagen guía</button>
+                            <div class="overlay" id="overlay21">
+                                <div class="popup" id="popup21">
+                                    <a href="#" id="btn-cerrar-popup21" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                                    <img src="../static/images/PlacaFacil(9).jpg" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <script src="../static/query/popup.js"></script>
+                            <br><input type="radio" name="tipotech" id="tipotecho" value="Eternit" onchange="techo3(this)"><label class="form_label"> Eternit</label>
+                            <button type="button" id="btn-abrir-popup22" class="btn-abrir-popup" style="vertical-align: auto;;" onclick="abrir22()">Imagen guía</button>
+                            <div class="overlay" id="overlay22">
+                                <div class="popup" id="popup22">
+                                    <a href="#" id="btn-cerrar-popup22" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                                    <img src="../static/images/Eternit(13).JPG" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <script src="../static/query/popup.js"></script>
+                            <br><input type="radio" name="tipotech" id="tipotecho" value="Estructura de madera y tejas de barro" onchange="techo1(this)"><label class="form_label"> Estructura de madera y tejas de barro</label>
+                            <button type="button" id="btn-abrir-popup23" class="btn-abrir-popup" style="vertical-align: auto;;" onclick="abrir23()">Imagen guía</button>
+                            <div class="overlay" id="overlay23">
+                                <div class="popup" id="popup23">
+                                    <a href="#" id="btn-cerrar-popup23" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                                    <img src="../static/images/MaderayBarro(11).jpg" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <script src="../static/query/popup.js"></script>
+                            <br><input type="radio" name="tipotech" id="tipotecho" value="Metálica" onchange="techo3(this)"><label class="form_label"> Metálica</label>
+                            <button type="button" id="btn-abrir-popup24" class="btn-abrir-popup" style="vertical-align: auto;;" onclick="abrir24()">Imagen guía</button>
+                            <div class="overlay" id="overlay24">
+                                <div class="popup" id="popup24">
+                                    <a href="#" id="btn-cerrar-popup24" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                                    <img src="../static/images/CubiertaMetalica(10).jpg" width="100%" height="100%">
+                                </div>
+                            </div>
+                            <script src="../static/query/popup.js"></script>
+                            </div>
+                                <!--12.1-->
+                                <label id="mensajetecho" class="form_label"></label>
+                                <br><label class="form_label">La edificacion presenta algun hundimiento: </label>
+                                <input type="radio" id="vivienda" name="hundimiento" value="Si" onchange="Hundimiento1(this)"><label class="form_label"> Si</label>
+                                <input type="radio" id="vivienda" name="hundimiento" value="No" onchange="Hundimiento2(this)"><label class="form_label"> No</label>
+                                <div id="AnexoEstado1" style="display:none;">
+                                    <br><label class="form_label">1.Lejana al hundimiento horizontal</label>
+                                    <input type="file" name="imagen" />
+                                </div>
+                                    <div id="AnexoEstado2" style="display:none;">
+                                    <br><label class="form_label">2. Cercana con algún objeto con el que se pueda dimensionar.(ejemplo: un lápiz o cuaderno al lado del hundimiento)</label>
+                                    <input type="file" name="imagen" />
+                                </div>
+                                <!--12.2-->
+                            <div id="grietas">
+                                <label class="form_label">Se evidencian grietas pronunciada en los muros y/o columnas:
+                                </label>
+                                <input type="radio" name="grietas" id="grietas1" value="Si" onchange="Grietas1(this)"><label class="form_label"> Si</label>
+                                <input type="radio" name="grietas" id="grietas2" value="No" onchange="Grietas2(this)"><label class="form_label"> No</label>
+                            </div>
+                            <div id="grietasanexo1" style="display:none;">
+                                <br><label class="form_label">1.Lejana a la grieta</label>
+                                <input type="file" name="imagen" />
+                            </div>
+                            <div id="grietasanexo2" style="display:none;">
+                                <br><label class="form_label">2. Cercana con algún objeto con el que se pueda
+                                    dimensionar.(ejemplo: un lápiz o cuaderno al lado del hundimiento)</label>
+                                <input type="file" name="imagen" />
+                            </div>
+                            <input name="resultado" type="text" id="resultado" style="display: none;">
+                            <br><input type="submit" class="btn_submit" value="Enviar" onclick="resultadoInterior()">
+                    </div>
+                </section>
+            </div>
+        </form>
+    </main>
+    <footer class="footer">
+        <div class="footer__container container">
+            <div class="footer__consolidado">
+                <div class="footer__texts">
+                    <br><br><br><br>
+                    <p class="footer__copy">Encuesta realizada por estudiantes de Ingeniería Civil</p><br>
+                    <p>Universidad Católica Luis Amigó, sede Medellín<br>Tv. 51a ##67B 90, Medellín, Antioquia</p><br>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

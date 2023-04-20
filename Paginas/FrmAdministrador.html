@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../static/images/icono.png" type="image/x-icon">
+    <link rel="stylesheet" href="../static/normalize.css">
+    <link rel="stylesheet" href="../static/styles3.css">
+    <title>Administrador</title>
+</head>
+<body>
+    <main class="main">
+        <form action="#" name="Login">
+            <div class="contenedor">
+                <a href="FrmInicio.html" class="form_return">Volver</a>
+                <img src="../static/images/icono.png" class="form_img">
+                <section class="login_container">
+                    <h2 class="form_title">Administrativo</h2>
+                    <p class="text_title">En esta sección podras encontrar la entrada para revisar el formulario</p>
+                    <label class="form_label">Usuario</label>
+                    <input type="text" class="form_input" placeholder="Ingresa su usuario" name="Usuario" required autofocus minlength="8">
+                    <label class="form_label">Contraseña</label>
+                    <input type="password" class="form_input" placeholder="Ingresa su contraseña" name="Contraseña" required minlength="6">
+                    <input type="submit" class="btn_submit" value="Ingresar" onclick="verificarDatos()"><br>
+                    <br><a href="#" class="form_link">¿Has olvidado la contraseña?</a><br>
+                </section>
+            </div>
+        </form>
+    </main>
+    <footer class="footer">
+        <div class="footer__container container">
+            <div class="footer__consolidado">
+                <div class="footer__texts">
+                    <br><br><br><br><p class="footer__copy">Proyecto realizado por estudiantes de Ingeniería Civil</p><br>
+                    <p>Universidad Católica Luis Amigó, sede Medellín<br>Tv. 51a ##67B 90, Medellín, Antioquia</p><br>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
+<script>
+    function verificarDatos(){
+    var usuario=document.Login.Usuario.value;
+    var password=document.Login.Contraseña.value;
+    if(usuario=="CristhianUrrea" && password=="1001362492"){
+        window.alert("Los datos son correctos");
+    } else if(usuario=="SarayMejia" && password=="123456789"){
+        window.alert("Los datos son correctos");
+        } else{
+        document.Login.Contraseña.value="";
+        window.alert("Los datos son incorrectos");
+    }
+}
+</script>
+
+<script> 
+  document.oncontextmenu = function(){return false} 
+</script>

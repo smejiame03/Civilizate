@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exterior de la vivienda</title>
+    <link rel="shortcut icon" href="../static/images/icono.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600|Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <link rel="stylesheet" href="../static/normalize.css">
+    <link rel="stylesheet" href="../static/styles1.css">
+    <script src="../static/query/scriptExterior.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <main class="main">
+        <form name="FormularioExterior" action="../DB/db_Exterior.php" method="post">
+            <section class="Info_encuestado container">
+                <div class="encuestado_container">
+                    <!--1.11-->
+                    <label for="NivelFormación" class="form_label">Nivel de formación:</label>
+                    <select name="NivelFormacion" required id="Formacion" onchange="validarFormacion()">
+                        <option value="#">Seleccione una opción</option>
+                        <option value="Primaria">Primaria</option>
+                        <option value="Bachillerato">Bachillerato</option>
+                        <option value="Técnico">Técnico</option>
+                        <option value="Tecnólogo">Tecnólogo</option>
+                        <option value="Universitario">Universitario</option>
+                        <option value="Ninguna">Ninguna</option>
+                    </select>
+                    <!--1.12-->
+                    <label id="mjformacion" class="form_label"></label>
+                    <br><label for="AñoConstrucción" class="form_label">Su vivienda fue construída:</label>
+                    <select name="AñoConstruccion" required="required" id="Construccion"
+                        onchange="validarConstruccion()">
+                        <option value="#">Seleccione una opción</option>
+                        <option value="Antes de 1963">Antes de 1963</option>
+                        <option value="Entre 1963 y 1984">Entre 1963 y 1984</option>
+                        <option value="Entre 1985 y 1997">Entre 1985 y 1997</option>
+                        <option value="Entre 1998 y 2010">Entre 1998 y 2010</option>
+                        <option value="A partir del 2011">A partir del 2011</option>
+                    </select>
+                    <label id="mjConstruccion" class="form_label"></label>
+                    <label id="conConstruccion" class="form_label"></label>
+                    <!--1.13-->
+                    <br><label class="form_label">¿Fue construída por alguna entidad o empresa constructora?</label>
+                    <select name="Constructora" required="required" id="Constructora"
+                        onchange="validarConstructora(this.form)">
+                        <option value="#">Seleccione una opción</option>
+                        <option value="Si">Si</option>
+                        <option value="No">No</option>
+                    </select>
+                    <label id="mjConstructora" class="form_label"></label>
+                    <table>
+                        <!--1.13.2-->
+                        <th id="anexoconstructora" style="display:none;">
+                            <br><label for="NomConstructora" class="form_label">Nombre de la constructora(opcional):
+                            </label>
+                            <input type="text" name="NomConstructora" class="form_input"
+                                placeholder="Escriba el nombre de la constructora">
+                        </th>
+                    </table>
+                    <h2 class="form_title">Al exterior de la vivienda</h2>
+                    <p class="text_title">Las siguientes preguntas se deberán realizar por fuera de la vivienda para
+                        poder observar las características de las preguntas</p><br>
+                    <!--2.1-->
+                    <label for="AreaVivienda" class="form_label">Àrea de la vivienda</label>
+                    <select name="AreaVivienda" id="metros" required="required" onchange="validarMetros()">
+                        <option value="#">Seleccione una opción</option>
+                        <option value="20 a 30m">20 a 30m</option>
+                        <option value="31 a 40m">31 a 40m</option>
+                        <option value="31 a 60m">31 a 60m</option>
+                        <option value="61 a 70m">61 a 70m</option>
+                        <option value="71 a 80m">71 a 80m</option>
+                        <option value="81 a 90m">81 a 90m</option>
+                        <option value="91m o mayor">91m o mayor</option>
+                    </select>
+                    <label id="mjmetros" class="form_label"></label>
+                    <!--2.2-->
+                    <br><label for="ImagenVivienda" class="form_label">Subir una imagen donde se pueda ver su vivienda y
+                        las viviendas aledañas</label>
+                    <form name="subida-imagenes" type="post" enctype="multipart/formdata">
+                        <input type="file" name="imagen" />
+                    </form>
+                    <!--3.1-->
+                    <br><label for="UbicaciónVivienda" class="form_label">Ubicación de la vivienda: </label>
+                    <br><input type="radio" value="Ladera" name="UbicacionVivienda" id="UbicacionVivienda1"
+                        onchange="validarUbicacion1(this)"><label class="form_label">Ladera</label>
+                    <button type="button" id="btn-abrir-popup25" class="btn-abrir-popup" style="vertical-align: auto;;"
+                        onclick="abrir25()">Imagen guía</button>
+                    <div class="overlay" id="overlay25">
+                        <div class="popup" id="popup25">
+                            <a href="#" id="btn-cerrar-popup25" class="btn-cerrar-popup"><i
+                                    class="fas fa-times"></i></a>
+                            <img src="../static/images/ladera(22).jpg" width="100%" height="100%">
+                        </div>
+                    </div>
+                    <script src="../static/query/popup.js"></script>
+                    <input type="radio" value="Valle" name="UbicacionVivienda" id="UbicacionVivienda2"
+                        onchange="validarUbicacion2(this)"><label class="form_label">Valle</label>
+                    <button type="button" id="btn-abrir-popup26" class="btn-abrir-popup" style="vertical-align: auto;;"
+                        onclick="abrir26()">Imagen guía</button>
+                    <div class="overlay" id="overlay26">
+                        <div class="popup" id="popup26">
+                            <a href="#" id="btn-cerrar-popup26" class="btn-cerrar-popup"><i
+                                    class="fas fa-times"></i></a>
+                            <img src="../static/images/Valle(23).jpg" width="100%" height="100%">
+                        </div>
+                    </div>
+                    <script src="../static/query/popup.js"></script>
+                    <!--3.2-->
+                    <br><label for="ElementosCercanos" class="form_label">Elementos cercanos a la vivienda: </label>
+                    <br><input type="radio" value="Quebrada" name="ElementosCercanos" id="elementosCercanos1"
+                        onchange="validarElementos1(this)"><label class="form_label"> Quebrada</label>
+                    <br><input type="radio" value="Valle" name="ElementosCercanos" id="elementosCercanos2"
+                        onchange="validarElementos2(this)"><label class="form_label">Valle</label>
+                    <button type="button" id="btn-abrir-popup27" class="btn-abrir-popup" style="vertical-align: auto;;"
+                        onclick="abrir27()">Imagen guía</button>
+                    <div class="overlay" id="overlay27">
+                        <div class="popup" id="popup27">
+                            <a href="#" id="btn-cerrar-popup27" class="btn-cerrar-popup"><i
+                                    class="fas fa-times"></i></a>
+                            <img src="../static/images/ladera(22).jpg" width="100%" height="100%">
+                        </div>
+                    </div>
+                    <script src="../static/query/popup.js"></script>
+                    <br><input type="radio" value="Montaña" name="ElementosCercanos" id="elementosCercanos3"
+                        onchange="validarElementos3(this)"> <label class="form_label"> Montaña</label>
+                    <!--4.1-->
+                    <br><label for="UsoVivienda" class="form_label">El uso actual predominante de la vivienda
+                        es:</label>
+                    <select name="UsoVivienda[]" id="UsoVivienda" required="required" onchange="validarUso(this.form)">
+                        <option value="#">Seleccione una opcion</option>
+                        <option value="Residencial">Residencial</option>
+                        <option value="Comercial">Comercial</option>
+                        <option value="Educacional">Educacional</option>
+                        <option value="Oficinas">Oficinas</option>
+                        <option value="Bodegas">Bodegas</option>
+                        <option value="Instalación deportiva">Instalación deportiva</option>
+                        <option value="Centro de salud">Centro de salud</option>
+                        <option value="Industrial">Industrial</option>
+                        <option value="Hotelero">Hotelero</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                    <label id="mjUsoVivienda" class="form_label"></label>
+                    <div id="anexoUsoVivienda" style="display:none;"><input name="UsoVivienda[]"type="text"
+                            placeholder="Si seleccionaste otro, especifique cuál" class="form_input"></div>
+                    <!--4.2-->
+                    <br><label for="UsoDiferente" class="form_label">La vivienda anteriormente tuvo un uso diferente al
+                        actual: </label>
+                    <input type="radio" name="UsoDiferente" value="Si" onclick="ValidarUsoDiferente(this)"><label
+                        class="form_label"> Si</label>
+                    <input type="radio" name="UsoDiferente" value="No" onclick="ValidarUsoDiferente1(this)"><label
+                        class="form_label"> No</label>
+                    <!--4.2.1-->
+                    <div id="UsoViviendaAnterior" style="display:none;">
+                        <br><label for="UsoViviendaAnterior" class="form_label">El uso de la vivienda anteriormente
+                            era:</label>
+                        <select name="UsoViviendaAnterior[]" id="UsoViviendaAnterior" required="required" onchange="anexoUsoVivienda(this.form)">
+                            <option value="#">Seleccione una opción</option>
+                            <option value="Residencial">Residencial</option>
+                            <option value="Comercial">Comercial</option>
+                            <option value="Educacional">Educacional</option>
+                            <option value="Oficinas">Oficinas</option>
+                            <option value="Bodegas">Bodegas</option>
+                            <option value="Instalación deportiva">Instalación deportiva</option>
+                            <option value="Centro de salud">Centro de salud</option>
+                            <option value="Industrial">Industrial</option>
+                            <option value="Hotelero">Hotelero</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                            <div id="anexoUsoViviendaAnterior" style="display:none;">
+                                <input type="text" name="UsoViviendaAnterior[]"placeholder="Si seleccionaste otro, especifique cuál" class="form_input">
+                            </div>
+                    </div>
+                    <!--4.3-->
+                    <br><label for="UsoViviendaPrimerPiso" class="form_label">El uso de la vivienda del primer piso
+                        es:</label>
+                    <select name="UsoViviendaPrimerPiso" id="UsoViviendaPrimerPiso" required="required"
+                        onchange="ValidarPrimerPiso()">
+                        <option value="#">Seleccione una opción</option>
+                        <option value="Residencial">Residencial</option>
+                        <option value="Comercial">Comercial</option>
+                        <option value="Educacional">Educacional</option>
+                        <option value="Oficinas">Oficinas</option>
+                        <option value="Bodegas">Bodegas</option>
+                        <option value="Instalación deportiva">Instalación deportiva</option>
+                        <option value="Centro de salud">Centro de salud</option>
+                        <option value="Industrial">Industrial</option>
+                        <option value="Hotelero">Hotelero</option>
+                        <option value="No aplica">No aplica</option>
+                    </select>
+                    <label id="mjPrimerPiso" class="form_label"></label>
+                    <!--5.1-->
+                    <br><label for="TotalPisos" class="form_label">El total de piso de la vivienda (si el edificio, casa
+                        o apartamento es de # pisos):</label>
+                    <select name="TotalPisos" id="TotalPisos" required="required" onchange="validarTotalPisos()">
+                        <option value="#">Seleccione una opción</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7 o mayores">7 o mayores</option>
+                    </select>
+                    <label id="mjTotalPisos" class="form_label"></label>
+                    <!--5.2-->
+                    <br><label for="PisoVivienda" class="form_label">La vivienda se encuentra ubicada en el piso:
+                    </label>
+                    <select name="PisoVivienda" id="PisoVivienda" required="required" onchange="validarPisoVivienda()">
+                        <option value="#">Seleccione una opción</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7 o mayores">7 o mayores</option>
+                    </select>
+                    <label id="mjPisoVivienda" class="form_label"></label>
+                    <!--5.3-->
+                    <br><label for="sotanos" class="form_label">Sótanos (incluye parqueaderos subterráneos)</label>
+                    <select name="sotanos" id="sotanos" required="required" onchange="validarSotanos()">
+                        <option value="#">Seleccione una opción</option>
+                        <option value="Ninguno">Ninguno</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="Mayores a 5">Mayores a 5</option>
+                    </select>
+                    <label id="mjSotanos" class="form_label"></label>
+                    <!--6.1-->
+                    <br><label for="muro" class="form_label">¿Comparte muro con los vecinos de al lado?</label>
+                    <input type="radio" value="Si" name="muro" onchange="validarMuro1()"><label
+                        class="form_label">Si</label>
+                    <input type="radio" value="No" name="muro" onchange="validarMuro2()"><label
+                        class="form_label">No</label>
+                    <!--7.1-->
+                    <br><label for="ElementosEspaciales" class="form_label">¿Hay presencia de equipos (grandes) dentro
+                        de la edificación?</label>
+                    <br><label for="ElementosEspaciales" class="form_label">Por favor solo seleccionar 2
+                        opciones</label>
+                    <br><input type="checkbox" name="ElementosEspaciales[]" id="ElementosEspaciales" value="Piscinas"
+                        onclick="checkbox()" onchange="otros1(this.checked)"><label
+                        class="form_label">Piscinas</label><br>
+                    <input type="checkbox" name="ElementosEspaciales[]" id="ElementosEspaciales" value="Canchas"
+                        onclick="checkbox()" onchange="otros2(this.checked)"><label
+                        class="form_label">Canchas</label><br>
+                    <input type="checkbox" name="ElementosEspaciales[]" id="ElementosEspaciales"
+                        value="Máquinas de gimnasio" onclick="checkbox()" onchange="otros3(this.checked)"><label
+                        class="form_label">Máquinas de gimnasio</label><br>
+                    <input type="checkbox" name="ElementosEspaciales[]" id="ElementosEspaciales" value="Tanques de agua"
+                        onclick="checkbox()" onchange="otros4(this.checked)"><label class="form_label">Tanques de
+                        agua</label><br>
+                    <input type="checkbox" name="ElementosEspaciales[]" id="ElementosEspaciales"
+                        value="Maquinaria Industrial" onclick="checkbox()" onchange="otros5(this.checked)"><label
+                        class="form_label">Maquinaria Industrial</label><br>
+                    <input type="checkbox" name="ElementosEspaciales[]" id="ElementosEspaciales" value="Almacenamientos"
+                        onclick="checkbox()" onchange="otros6(this.checked)"><label
+                        class="form_label">Almacenamientos</label><br>
+                    <input type="checkbox" name="ElementosEspaciales[]" id="ElementosEspaciales"
+                        value="Ninguna de las anteriores" onclick="checkbox()" onchange="otros7(this.checked)"><label
+                        class="form_label">Ninguna de las anteriores</label><br>
+                    <input type="checkbox" name="ElementosEspaciales[]" id="ElementosEspaciales8" value="Otro"
+                        onclick="checkbox()" onchange="otros8(this.checked)"><label class="form_label">Otro</label>
+                    <br><label id="contadorotros"></label>
+                    <div id="anexoElementosEspaciales" style="display:none;"><input type="text" name="ElementosEspaciales[]" placeholder="Si seleccionaste otro, especifique cuál" class="form_input"></div>
+                    <input name="resultado" type="text" id="resultado" style="display: none;">
+                    <br><input type="submit" class="btn_submit" value="Continuar" onclick="resultadoExterior()">
+                </div>
+            </section>
+        </form>
+    </main>
+    <footer class="footer">
+        <div class="footer__container container">
+            <div class="footer__consolidado">
+                <div class="footer__texts">
+                    <br><br><br><br>
+                    <p class="footer__copy">Encuesta realizada por estudiantes de Ingeniería Civil</p><br>
+                    <p>Universidad Católica Luis Amigó, sede Medellín<br>Tv. 51a ##67B 90, Medellín, Antioquia</p><br>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
